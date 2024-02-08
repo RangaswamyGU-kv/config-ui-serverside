@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Layout, Menu } from 'antd';
 
 // Assets
-import logo from '../../assets/LIVERPOOL_logo.png';
+var  logo =  require('../../assets/LIVERPOOL_logo.png') ;
 
 // Services
 import {
@@ -34,11 +34,11 @@ export default function NavBar(props) {
   //     </Menu.Item>
   //   )))
   // }
-
+console.log("image",logo.default,JSON.stringify(logo))
   return (
     <Header className={styles.header}>
       <div className={styles.logo}>
-        <img className={styles.logo_img} src={logo} alt="logo" />
+        <img className={styles.logo_img} src={logo} alt="logo hey3" />
       </div>
       {props.isLogout &&
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['configurations']} className={styles.menu}>

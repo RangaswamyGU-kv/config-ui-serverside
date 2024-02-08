@@ -33,7 +33,7 @@ export default class App extends React.Component {
 }
 
 setSelected = async (selected) => {
-  debugger;
+  
   if(this.state.config !== '' || !this.state.config?.body?.length){
       await this.callGlobalConfig();
   }
@@ -43,7 +43,7 @@ setSelected = async (selected) => {
   }
   const response = await request(`${selected}`);
   if (response.data) {
-    debugger;
+    
       this.setState({
           selected, 
           selectedConfig: config?.body?.find(i => i.urlPath === selected), 

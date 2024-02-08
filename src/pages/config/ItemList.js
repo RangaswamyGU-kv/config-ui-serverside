@@ -42,7 +42,7 @@ export default class ItemList extends Component {
   componentDidUpdate() {
     // change
     if (this.props.setSelected !== this.state.data) {
-      debugger;
+      
       this.setState({ data: this.props.tableData })
     }
   }
@@ -473,7 +473,7 @@ export default class ItemList extends Component {
     if (response.status === 200) {
       !this.state.isSingle && message.success({ content: `Config Updated successfully!`, key: 'updatable', duration: 4 });
       setTimeout(() => {
-        debugger;
+        
         this.props.handleUpdate();
         this.props._setSelected(urlPath);
         this.state.isSingle && this.props.removeClick(this.props.id, this.props.url)

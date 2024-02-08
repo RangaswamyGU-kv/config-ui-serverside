@@ -1,7 +1,7 @@
 export const getCookie=(cname,cookies)=>{
     let name = cname + "=";
     let decodedCookie = cookies;
-    let ca = decodedCookie.split(';');
+    let ca =decodedCookie && decodedCookie.split(';') || ''; 
     for(let i = 0; i <ca.length; i++) {
       let c = ca[i];
       while (c.charAt(0) == ' ') {

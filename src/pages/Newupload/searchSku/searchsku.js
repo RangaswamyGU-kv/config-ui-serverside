@@ -1,5 +1,5 @@
  import {Table} from 'antd';
- import React, { Component } from 'react';
+ import React,{ Component } from "react";
 import { Button } from "antd";
 import { isEmpty } from "lodash";
 import styles from '../../../styles/upload.module.css';

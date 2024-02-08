@@ -1,12 +1,12 @@
-import React,{ Component } from "react"
+import React,{ Component } from "react";
 import Papa from "papaparse";
 import { Button,message,Spin } from "antd";
-import { isEmpty, lowerCase, toUpper } from "lodash";
+import { isEmpty, isNumber, lowerCase, toUpper } from "lodash";
 import SeacrhSkuComponent from "../searchSku/searchsku";
 import styles from '../../../styles/upload.module.css';
 import withAuth from '../../../lib/auth/withAuth';
-import { requestFeedMastePost } from "../../../lib/request"; 
-class UploadDocument extends Component {
+import { requestbydservices } from "../../../lib/request"; 
+class UploadBydComponent extends Component {
     state = {
         fileData: null,
         allRecord: null,
@@ -61,7 +61,7 @@ class UploadDocument extends Component {
             "batchCount": batchcount
         }
         try {             
-            const response = await requestFeedMastePost(url,payload,'post')
+            const response = await requestbydservices(url,payload,'post')
             if (response && response.data) {
                 return response.data
             }
@@ -92,7 +92,7 @@ class UploadDocument extends Component {
             "batchCount": batchcount
         }
         try {
-            const response = await requestFeedMastePost(url,payload,'post')
+            const response = await requestbydservices(url,payload,'post')
             if (response && response.data) {
                 this.setloaderState(false)
                 return response.data              
@@ -109,7 +109,7 @@ class UploadDocument extends Component {
 
     }
 
-    submitFileHandlerForNewArrival = async() => {
+    HandlerForTransSkuDetails = async() => {
         const { uploadtype } = this.props;
         if (this.state.fileData == null) {
             this.setState({
@@ -124,21 +124,23 @@ class UploadDocument extends Component {
             reader.onload = async ({ target }) => {
                 const csv = Papa.parse(target.result, {
                     step: function (row) {
-                        if (row.data && !isEmpty(row.data) && row.data.length === 5) {
-                            if (!(row.data[0].includes("ID"))) {                            
+                        if (row.data && !isEmpty(row.data)) {
+                            if (  !isEmpty(row.data[0])  && !(row.data[0].includes('sku'))) {
                                 let data = {}
                                 data['identifier'] = row.data[0]
-                                data['activeDate'] = row.data[1]
-                                if(Number(row.data[3])){
-                                    data['enabled'] = Number(row.data[3]) === 1 ? true : false;
+                                data['skuType'] = row.data[1]
+                                if(Number(row.data[6])){
+                                    data['indicatorActive'] = Number(row.data[6]) === 1 ? true : false;
                                    
                                 }
                                 else{
-                                    data['enabled'] = lowerCase(row.data[3]) === "true" ? true : false;
+                                    data['indicatorActive'] = lowerCase(row.data[6]) === "true" ? true : false;
                                 }
-                                data['purchaseCount'] = Number(row.data[2])
+                                data['skuName'] = row.data[2]
                                 
-                                data['ean'] = row.data[4]
+                                data['basePrice'] = Number(row.data[3])
+                                data['skuSection'] = row.data[5]
+                                data['priceInWords'] = row.data[4]
                                 records.push(data)
                             }
                             else{
@@ -163,16 +165,22 @@ class UploadDocument extends Component {
                 const data = await this.initiateFileUpload(totalsize, uploadtype, batchsize) 
                 let response = null;
                 let jobId = data && data.id 
-                if (data && data.s === 0) {
-
+                if (data && data.s === 0 ) {
                     let startIndex = 0;
                     let endIndex = batchsize; 
                     const url =`${uploadtype}/${jobId}`;
                     do {
                         try {
-                            response = await requestFeedMastePost(url, records.slice(startIndex, endIndex),'post').then((res) => {
+                            response = await requestbydservices(url, records.slice(startIndex, endIndex),'post').then((res) => {
                                 succescount = succescount + 1
+                            }).catch((e)=>{
+                                console.error("problem with count after " + count, e);
+                                failedcount = failedcount + (records.slice(startIndex, endIndex)).length;
                             })
+                          
+                            if (response && response.status !== 200){
+                                failedcount = failedcount + (records.slice(startIndex, endIndex)).length;
+                            }
                         } catch (e) {
                             console.error("problem with count after " + count, e);
                             failedcount = failedcount + (records.slice(startIndex, endIndex)).length;
@@ -184,7 +192,7 @@ class UploadDocument extends Component {
                     } while (startIndex < totalsize);
                 }
                 //calling finishedfileuploadservice
-                if (data && data.s === 0) {
+                if (data && data.s === 0 ) {
                     try {
                         const finished = await this.finishedFileUpload(totalsize, uploadtype, failedcount, succescount, jobId)
                         if (finished && finished.s == 0){
@@ -206,7 +214,7 @@ class UploadDocument extends Component {
 
     }
 
-    submitFileHandlerforMaterial = async() => {
+    HandlerforTransSkuMapping = async() => {
         const { uploadtype } = this.props;
         if (this.state.fileData == null) {
             this.setState({
@@ -221,16 +229,17 @@ class UploadDocument extends Component {
             reader.onload = async ({ target }) => {
                 const csv = Papa.parse(target.result, {
                     step: function (row) {
-                        if (row.data && !isEmpty(row.data) && row.data.length === 2) {
-                            if (!(row.data[0].includes("ID"))) {
+                        if (row.data && !isEmpty(row.data) ) {
+                            if (!(row.data[0].includes("sku")) &&  !isEmpty(row.data[0]) ) { //need to check for 
                                 let data = {}
                                 data['identifier'] = row.data[0] 
-                                if(Number(row.data[1])){
-                                    data['enabled'] = Number(row.data[1]) === 1 ? true : false;
+                                data['transactionSkuId'] = row.data[1] 
+                                if(Number(row.data[2])){
+                                    data['enabled'] = Number(row.data[2]) === 1 ? true : false;
                                    
                                 }
                                 else{
-                                    data['enabled'] = lowerCase(row.data[1]) === "true" ? true : false;
+                                    data['enabled'] = lowerCase(row.data[2]) === "true" ? true : false;
                                 }
                                 records.push(data)
                             }
@@ -243,7 +252,6 @@ class UploadDocument extends Component {
                         } 
                     },
                     complete: function () {
-                        // console.log("records",records)
                         if(!isEmpty(ImproperRecords)){
                             console.log("unable to upload these records for material group",ImproperRecords)
                         }
@@ -266,8 +274,11 @@ class UploadDocument extends Component {
                     const url = `${uploadtype}/${jobId}`
                     do {
                         try {
-                            response = await requestFeedMastePost(url, records.slice(startIndex, endIndex),'post').then((res) => {
+                            response = await requestbydservices(url, records.slice(startIndex, endIndex),'post').then((res) => {
                                 succescount = succescount + 1
+                            }).catch((e)=>{
+                                console.error("problem with count after " + count, e);
+                                failedcount = failedcount + (records.slice(startIndex, endIndex)).length;
                             })
                         } catch (e) {
                             console.error("problem with count after " + count, e);
@@ -331,13 +342,13 @@ class UploadDocument extends Component {
                             onChange={(e) => { this.handleFileUpload(e) }}
                         />
 
-                        { uploadtype === "newArrivals" ?
-                            <Button type="primary" disabled={!isCSVformat} onClick={() => { this.submitFileHandlerForNewArrival() }}>
+                        { uploadtype === "transactionalSkuDetails" ?
+                            <Button type="primary" disabled={!isCSVformat} onClick={() => { this.HandlerForTransSkuDetails() }}>
                                 Cargar ahora </Button> :
-                            <Button type="primary" disabled={!isCSVformat} onClick={() => { this.submitFileHandlerforMaterial() }}>
+                            <Button type="primary" disabled={!isCSVformat} onClick={() => { this.HandlerforTransSkuMapping() }}>
                                 Cargar ahora </Button>
                         }
-                        {isRecordEmpty && <p className={styles.error}>{"kindly upload a file !"}</p>}
+                        {isRecordEmpty && <p className={styles.error}>{"por favor cargue un archivo !"}</p>}
                         {!isCSVformat && <p className={styles.error}>{"upload CSV file only!"}</p>}
                     </div>
                     </Spin>   
@@ -350,9 +361,9 @@ class UploadDocument extends Component {
                     <hr />
                 </div>
 
-                <div>
+                {/* <div>
                     <SeacrhSkuComponent {...this.props} />
-                </div>
+                </div> */}
 
             </div>
                         
@@ -360,4 +371,4 @@ class UploadDocument extends Component {
     }
 }
 
-export default withAuth(UploadDocument);
+export default withAuth(UploadBydComponent);

@@ -213,7 +213,7 @@ export default class BlankInput extends Component {
   }
 
   handleClick = (prp) => {
-    debugger;
+    
       let value = "";
       if(prp === "Map"){
         value = {}
@@ -499,7 +499,7 @@ export default class BlankInput extends Component {
   }
 
   call = async (formData, urlPath) => {
-    debugger;
+    
     console.log("sadsadsa===",urlPath)
     message.loading({ content: 'Create Config...', key: 'updatable', duration: 4 });
     const response = await createRequest(`global-config/config/${urlPath}`, 'post', formData);

@@ -67,7 +67,7 @@ export default class DisplayName extends Component {
     }
 
     setSelected = (selected,id, url) => {
-        debugger;
+        
         console.log("stateResponses===",selected)
         window.scrollTo({
             top: 0,
@@ -98,7 +98,7 @@ export default class DisplayName extends Component {
     }
 
     onSearch = (e) => {
-        debugger;
+        
         console.log("stateResponses===",e)
         // change
         this.setState({ 
@@ -201,7 +201,7 @@ export default class DisplayName extends Component {
     }
 
     removeClick = (id, urlPath) => {
-        debugger;
+        
         // change
         this.call(id, urlPath)
     }

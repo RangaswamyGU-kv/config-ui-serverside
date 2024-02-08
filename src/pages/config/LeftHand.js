@@ -105,7 +105,7 @@ export default class LeftHandData extends React.Component {
     }
 
     call = async (id, urlPath) => {
-        debugger;
+        
     console.log("sadsadsa===",urlPath)
         console.log(id,urlPath,requestDelete)
         let configInfo = await requestDelete(`global-config/config/${urlPath}/${id}`, 'delete')

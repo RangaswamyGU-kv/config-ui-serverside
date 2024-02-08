@@ -46,7 +46,7 @@ class Config extends Component {
        // const selected = '/configMapService'
        
         if(!this.props.response){
-            debugger;
+            
             this.props.setSelected(selected)
         }
         this.setConfig();
@@ -54,7 +54,7 @@ class Config extends Component {
 
    async componentDidUpdate() {
         // change
-        debugger;
+        
         this.setConfig();
     }
 
