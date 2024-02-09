@@ -38,7 +38,7 @@ export const requestbydservicesPost = async (url, formData = {}, method = 'post'
 }
 export const requestbydservices = async (url, formData = {}, method = 'POST') => {
     try {
-        const data = await axios[method](`${process.env.REACT_APP_BYD_URL}/${url}`, formData, {
+        const data = await axios[method]( url, formData, {
             headers: getHeaders(),
         })
         return data

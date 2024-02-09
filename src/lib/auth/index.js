@@ -40,6 +40,9 @@ export function getUserRole() {
 export function store(key, value) {
     return sessionStorage.setItem(key, value)
 }
+export function getDomainName() {
+    return sessionStorage.getItem('domain')
+}
 
 export function getItem(key) {
     return sessionStorage.getItem(key)

@@ -10,6 +10,12 @@ module.exports = {
   uploadStarts:"/file/uploadStarts",
   uploadFinished:"/file/uploadFinished",
   createUser:"/global-config/register",
-  getusers:"/global-config/user"
+  getusers:"/global-config/user",
   //config:"/global-config/config"
+
+  searchtranSkuDetails:"/transactionalSkuDetails",
+  searchtranSkuMapping:"/browseTransactionalSkuMapping",
+  bydrecordsCount:"fetch/recordsCount"
+
+
 };

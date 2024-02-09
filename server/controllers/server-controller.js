@@ -6,6 +6,7 @@ const logger = require("../logger");
 
 var reactAppUrl = process && process.env && process.env.REACT_APP_BASE_URL;
 var feedmaster = process && process.env && process.env.REACT_APP_FEED_MASTER_URL;
+var bydservice = process && process.env && process.env.REACT_APP_BYD_URL;
 
 module.exports = {
   loginService: async (req, res, next) => {
@@ -113,6 +114,27 @@ createconfigList: async (req, res, next) => {
     let finalUrl = `${reactAppUrl}${endpoints.getusers}`;    
     // console.log("finalUrl===",finalUrl);
     let response = await serviceReq(req,finalUrl, "GET",{},req.headers,true);
+    let statusCode = response && response.status || 400
+    res.status(statusCode).send(response && response.data);
+  },
+  searchSkudetails: async (req, res, next) => {
+    let finalUrl = `${bydservice}${endpoints.searchtranSkuDetails}`;
+    let response = await serviceReq(req, finalUrl, "GET", {}, req.headers, true);
+    // console.log("searchCount response===",response);
+    let statusCode = response && response.status || 400
+    res.status(statusCode).send(response && response.data);
+  },
+  searchSkumapping: async (req, res, next) => {
+    let finalUrl = `${bydservice}${endpoints.searchtranSkuMapping}`;
+    let response = await serviceReq(req, finalUrl, "GET", {}, req.headers, true);
+    // console.log("searchCount response===",response);
+    let statusCode = response && response.status || 400
+    res.status(statusCode).send(response && response.data);
+  },
+  getBydCount: async (req, res, next) => {
+    let finalUrl = `${bydservice}${endpoints.getBydCount}`;
+    let response = await serviceReq(req, finalUrl, "POST", {}, req.headers, true);
+    // console.log("searchCount response===",response);
     let statusCode = response && response.status || 400
     res.status(statusCode).send(response && response.data);
   },

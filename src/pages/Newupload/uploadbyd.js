@@ -18,7 +18,7 @@ class UploadData extends Component {
 
 
     componentDidMount = async() =>{
-        const url =  'fetch/recordsCount';
+        const url =  '/bydrecordsCount';
         try{
              
             const response = await requestbydservices(url,{},'post')
