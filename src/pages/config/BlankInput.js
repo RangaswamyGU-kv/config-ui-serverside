@@ -1,5 +1,5 @@
 // Package
-import { Component } from "react";
+import React,{ Component } from "react";
 import { cloneDeep, isEmpty } from 'lodash';
 import moment from 'moment';
 
@@ -498,11 +498,10 @@ export default class BlankInput extends Component {
     }
   }
 
-  call = async (formData, urlPath) => {
-    
+  call = async (formData, urlPath) => {    
     console.log("sadsadsa===",urlPath)
     message.loading({ content: 'Create Config...', key: 'updatable', duration: 4 });
-    const response = await createRequest(`global-config/config/${urlPath}`, 'post', formData);
+    const response = await createRequest(`/${urlPath}`, 'post', formData);
     if (response.status === 200) {
       message.success({ content: `Config Created successfully!`, key: 'updatable', duration: 4 });
       setTimeout(() => {

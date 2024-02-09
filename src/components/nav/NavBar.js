@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Layout, Menu } from 'antd';
 
 // Assets
-var  logo =  require('../../assets/LIVERPOOL_logo.png') ;
+import  logo from '../../assets/LIVERPOOL_logo.png';
 
 // Services
 import {

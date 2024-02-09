@@ -35,7 +35,7 @@ class ViewUser extends Component {
     }
 
     async getUserData() {
-        const results = await request('global-config/user')
+        const results = await request('/users')
         if (results && results.data && results.data.users) {
             this.setState({ users: results.data.users })
         } else {

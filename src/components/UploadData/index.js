@@ -17,7 +17,7 @@ class UploadData extends Component {
 
 
     componentDidMount = async() =>{
-        const url =  'fetch/recordsCount';
+        const url =  '/recordsCount';
         try{
             const response =  await requestFeedMastePost(url,{},'post')
             if(response && response.data) {

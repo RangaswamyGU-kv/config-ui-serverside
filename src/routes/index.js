@@ -2,7 +2,6 @@
 import Login from "../pages/Login";
 // Interviewer
 import Config from "../pages/config/index";
-import Interviewer from "../pages/Interviewer";
 import UploadData from "../../src/components/UploadData/index";
 import NewUploadData from "../pages/Newupload/index";
 import Users from "../pages/users/index"

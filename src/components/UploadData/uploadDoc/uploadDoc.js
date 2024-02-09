@@ -51,7 +51,7 @@ class UploadDocument extends Component {
         message.info("Data Upload Started..")
         this.setloaderState(true)
         const { fileName } = this.state;
-        const url = 'file/uploadStarts';
+        const url = '/uploadStarts';
         const uploadtype = toUpper(type)
         let batchcount = Math.ceil(totalRecords / batchsize);
         let payload = {
@@ -81,7 +81,7 @@ class UploadDocument extends Component {
     }
     finishedFileUpload = async (totalRecords, type, failedcount, batchcount, jobid) => {
         const { fileName } = this.state;
-        const url ="file/uploadFinished";
+        const url ="/uploadFinished";
         const uploadtype = toUpper(type)
         let payload = {
             "id": jobid,
@@ -266,6 +266,7 @@ class UploadDocument extends Component {
                     const url = `${uploadtype}/${jobId}`
                     do {
                         try {
+                            //need tp track this route
                             response = await requestFeedMastePost(url, records.slice(startIndex, endIndex),'post').then((res) => {
                                 succescount = succescount + 1
                             })

@@ -6,5 +6,10 @@ module.exports = {
   staticKeys:"/global-config/config/staticKeys",
   supplierConfig:"/global-config/config/supplierConfig",
   configList:"/global-config/config/configList",
+  recordsCount:"/fetch/recordsCount",
+  uploadStarts:"/file/uploadStarts",
+  uploadFinished:"/file/uploadFinished",
+  createUser:"/global-config/register",
+  getusers:"/global-config/user"
   //config:"/global-config/config"
 };

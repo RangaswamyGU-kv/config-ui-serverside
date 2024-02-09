@@ -62,7 +62,7 @@ async callGlobalConfig () {
   if (isAuthorized) {
        try
        {
-        config = await request("/config-menu");
+        config = await request("/config");
         if (config.data && config.data.body) {
           store('config', JSON.stringify(config.data.body));
           this.setState({ 

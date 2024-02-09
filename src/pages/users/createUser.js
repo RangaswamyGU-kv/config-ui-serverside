@@ -80,10 +80,11 @@ function CreateUser(props) {
                 message.error({ content: 'Oops, Unable to create the user, please try again!', key: 'updatable', duration: 4 });
             }
         } else {
-            const result = await requestPost('global-config/register', formObject)
+            const result = await requestPost('/createUser', formObject)
+            console.log("result.data",result.data)
             if (result.data) {
                 message.success({ content: `New user ${values.userName} created successfully!`, key: 'updatable', duration: 4 });
-                form.resetFields()
+                // form.resetFields()
             } else {
                 message.error({ content: 'Oops, Unable to create the user, please try again!', key: 'updatable', duration: 4 });
             }

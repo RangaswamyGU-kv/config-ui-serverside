@@ -7,7 +7,7 @@ const getHeaders = () => {
 }
 export const request = async (url) => {
     try {
-        const data = await axios.get(`${url}`, {
+        const data = await axios.get(url, {
             headers: getHeaders()
         })
         if (!data) {
@@ -20,7 +20,7 @@ export const request = async (url) => {
 }
 export const requestFeedMastePost = async (url, formData = {}, method = 'post') => {
     try {
-        const data = await axios[method](`${process.env.REACT_APP_FEED_MASTER_URL}/${url}`, formData, {
+        const data = await axios[method](url, formData, {
             headers: getHeaders(),
         })
         return data
@@ -49,7 +49,7 @@ export const requestbydservices = async (url, formData = {}, method = 'POST') =>
 
 export const requestPost = async (url, formData = {}, method = 'post') => {
     try {
-        const data = await axios[method](`${process.env.REACT_APP_BASE_URL}/${url}`, formData, {
+        const data = await axios[method](url, formData, {
             headers: getHeaders(),
         })
         return data
@@ -92,7 +92,7 @@ export const requestDelete = async (url, action) => {
 
 export const createRequest = async (url, action, formData) => {
     try {
-        const data = await axios[action](`${process.env.REACT_APP_BASE_URL}/${url} `, formData, {
+        const data = await axios[action](url, formData, {
             headers: getHeaders(),
 
         })
