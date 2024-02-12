@@ -7,6 +7,7 @@ const logger = require("../logger");
 var reactAppUrl = process && process.env && process.env.REACT_APP_BASE_URL;
 var feedmaster = process && process.env && process.env.REACT_APP_FEED_MASTER_URL;
 var bydservice = process && process.env && process.env.REACT_APP_BYD_URL;
+var comprasService = process && process.env && process.env.REACT_APP_BYD_URL;
 
 module.exports = {
   loginService: async (req, res, next) => {
@@ -94,13 +95,37 @@ createconfigList: async (req, res, next) => {
     let statusCode = response && response.status || 400
     res.status(statusCode).send(response && response.data);
   },
-  searchUpload: async (req, res, next) => {
+  searchUploadstart: async (req, res, next) => {
     let finalUrl = `${feedmaster}${endpoints.uploadStarts}`;
-    // console.log("finalUrl===", finalUrl);
-    // console.log("payload",req.FormData)
-    // let response = await serviceReq(req, finalUrl, "POST",req.body, req.headers, true);
-    // let statusCode = response && response.status || 400
-    // res.status(statusCode).send(response && response.data);
+    console.log("finalUrl===", finalUrl);
+    console.log("payload",req.FormData)
+    let response = await serviceReq(req, finalUrl, "POST",req.body, req.headers, true);
+    let statusCode = response && response.status || 400
+    res.status(statusCode).send(response && response.data);
+  },
+  searchUploadfinish: async (req, res, next) => {
+    let finalUrl = `${feedmaster}${endpoints.uploadFinished}`;
+    console.log("finalUrl===", finalUrl);
+    console.log("payload",req.FormData)
+    let response = await serviceReq(req, finalUrl, "POST",req.body, req.headers, true);
+    let statusCode = response && response.status || 400
+    res.status(statusCode).send(response && response.data);
+  },
+  materialgroupUpload: async (req, res, next) => {
+    console.log("req",req.params)
+    let finalUrl = `${feedmaster}${endpoints.matrialGroupupload}${req.params.id}`;
+    console.log("finalUrl===", finalUrl);    
+    let response = await serviceReq(req, finalUrl, "POST",req.body, req.headers, true);
+    let statusCode = response && response.status || 400
+    res.status(statusCode).send(response && response.data);
+  },
+  newArrivalsUpload: async (req, res, next) => {
+    console.log("req",req.params)
+    let finalUrl = `${feedmaster}${endpoints.newArrivalupload}${req.params.id}`;
+    console.log("finalUrl===", finalUrl);    
+    let response = await serviceReq(req, finalUrl, "POST",req.body, req.headers, true);
+    let statusCode = response && response.status || 400
+    res.status(statusCode).send(response && response.data);
   },
   createUser: async (req, res, next) => {
    let finalUrl = `${reactAppUrl}${endpoints.createUser}`;
@@ -138,5 +163,13 @@ createconfigList: async (req, res, next) => {
     let statusCode = response && response.status || 400
     res.status(statusCode).send(response && response.data);
   },
+  comprasPrice: async (req, res, next) => {
+    let finalUrl = `${reactAppUrl}${endpoints.comprasPrice}`;
+     console.log("createUser finalUrl===", finalUrl);
+     console.log("createUser payload",req.body)
+     let response = await serviceReq(req, finalUrl, "POST",req.body, req.headers, true);
+     let statusCode = response && response.status || 400
+     res.status(statusCode).send(response && response.data);
+   },
   
 };

@@ -1,6 +1,6 @@
 import { loginRequest } from '../../lib/request'
 import jwt_decode from "jwt-decode";
-const {setCookie} = require("../../utils/storage/index")
+const { setCookie } = require("../../utils/storage/index")
 
 export async function authLogin({ userName, password }) {
     const { data } = await loginRequest({ userName, password })
@@ -40,9 +40,9 @@ export function getUserRole() {
 export function store(key, value) {
     return sessionStorage.setItem(key, value)
 }
-export function getDomainName() {
-    return sessionStorage.getItem('domain')
-}
+// export function getDomainName() {
+//     return window && window.sessionStorage && sessionStorage.getItem('domain')
+// }
 
 export function getItem(key) {
     return sessionStorage.getItem(key)

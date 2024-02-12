@@ -101,3 +101,20 @@ export const createRequest = async (url, action, formData) => {
         return error
     }
 }
+
+export const configRequestforComp = async (url, formData = {}, method = 'post') => {
+    try {
+        const data = await axios[method](url, formData, {
+            headers: getHeaders(),
+        })
+        return data
+    } catch (error) {
+        if (error.response) {
+            return error.response
+          }
+          else{
+            return error
+          }
+       
+    }
+}

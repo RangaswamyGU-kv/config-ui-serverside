@@ -1,5 +1,5 @@
 import { Button, Form, message, Radio, Spin } from "antd";
-import { Component } from "react";
+import React,{ Component } from "react";
 import withAuth from "../../lib/auth/withAuth";
 import { configRequestforComp } from "../../lib/request";
 import styles from '../../styles/upload.module.css';
@@ -34,7 +34,7 @@ class PriceDetail extends Component {
         formData.append('serviceType', serviceType)
         try {
             this.setState({isload:true})
-            const response = await configRequestforComp('upload/priceDataUpload', formData)
+            const response = await configRequestforComp('/priceDataUpload', formData)
             console.log(response) 
             if (response) {
                 if (!!response.data.errorMessage) {

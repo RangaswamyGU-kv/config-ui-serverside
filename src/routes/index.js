@@ -4,7 +4,8 @@ import Login from "../pages/Login";
 import Config from "../pages/config/index";
 import UploadData from "../../src/components/UploadData/index";
 import NewUploadData from "../pages/Newupload/index";
-import Users from "../pages/users/index"
+import Users from "../pages/users/index";
+import Compras from "../pages/comp-services/uploadPrice";
 
 export const routes = [
     {
@@ -70,6 +71,12 @@ export const routes = [
       {
         path:'/users/create',
         component: Users,
+        exact: true,
+        isProtected: false
+      },
+      {
+        path:'/compras/service',
+        component: Compras,
         exact: true,
         isProtected: false
       }

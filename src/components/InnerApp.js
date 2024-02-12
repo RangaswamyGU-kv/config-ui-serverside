@@ -117,7 +117,7 @@ triggerLogout = () => {
           <Content>
             <Switch>
               {routes.map(({ component, exact, path, isProtected, isRedirect, redirectUrl }, index) => {
-                {console.log("===",path)}
+                 
                 return isProtected && isRedirect == true ? (
                   <PrivateRoute exact={exact} selectedConfig={this.state.selectedConfig} selected = {this.state.selected} response={this.state.response}  config={this.state.config} triggerLogin ={this.triggerLogin} triggerNavbarFromLogin={this.triggerNavbarFromLogin} setSelected={this.setSelected} path={path} key={index} component={() => <Redirect to={redirectUrl} />} />
                 ) : isProtected ? (

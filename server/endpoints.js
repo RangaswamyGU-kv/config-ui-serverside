@@ -9,13 +9,16 @@ module.exports = {
   recordsCount:"/fetch/recordsCount",
   uploadStarts:"/file/uploadStarts",
   uploadFinished:"/file/uploadFinished",
+  matrialGroupupload:"/materialGroup/",
+  newArrivalupload:"/newArrivals/",
   createUser:"/global-config/register",
   getusers:"/global-config/user",
   //config:"/global-config/config"
 
   searchtranSkuDetails:"/transactionalSkuDetails",
   searchtranSkuMapping:"/browseTransactionalSkuMapping",
-  bydrecordsCount:"fetch/recordsCount"
+  bydrecordsCount:"/fetch/recordsCount",
+  comprasPrice:"/upload/priceDataUpload"
 
 
 };

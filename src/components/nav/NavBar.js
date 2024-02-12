@@ -34,7 +34,7 @@ export default function NavBar(props) {
   //     </Menu.Item>
   //   )))
   // }
-console.log("image",logo.default,JSON.stringify(logo))
+ 
   return (
     <Header className={styles.header}>
       <div className={styles.logo}>
@@ -63,7 +63,7 @@ console.log("image",logo.default,JSON.stringify(logo))
                   to={`/config/configMap`}
                   className={styles.link}
                 >
-                  Configurations
+                  Configurations hi
                 </Link>
                 
               </Menu.Item>
@@ -86,6 +86,17 @@ console.log("image",logo.default,JSON.stringify(logo))
                   className={styles.link}
                 >
                   BYD
+                </Link>
+                
+              </Menu.Item>
+              <Menu.Item key="compras"
+                className={styles.menu_item}
+              >
+                <Link
+                  to={`/compras/service`}
+                  className={styles.link}
+                >
+                  compras
                 </Link>
                 
               </Menu.Item>

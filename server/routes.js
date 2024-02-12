@@ -18,10 +18,10 @@ routes.post("/configList", serverController.createconfigList);
 
 
 routes.get('/recordsCount',serverController.searchCount);
-routes.post('/uploadStarts',serverController.searchUpload);
-routes.post('/materialGroup/:id',serverController.searchUpload)
-routes.post('/newArrivals/:id',serverController.searchUpload)
-routes.post('/uploadFinished',serverController.searchUpload);
+routes.post('/uploadStarts',serverController.searchUploadstart);
+routes.post('/materialGroup/:id',serverController.materialgroupUpload)
+routes.post('/newArrivals/:id',serverController.newArrivalsUpload)
+routes.post('/uploadFinished',serverController.searchUploadfinish);
 routes.post('/createUser',serverController.createUser);
 routes.get("/users", serverController.getUsers);
 
@@ -29,4 +29,8 @@ routes.get("/users", serverController.getUsers);
 routes.get('/transactionalSkuDetails/:searchterm',serverController.searchSkudetails);
 routes.get('/browseTransactionalSkuMapping/:searchterm',serverController.searchSkumapping);
 routes.post("/bydrecordsCount",serverController.getBydCount)
+
+//compras
+routes.post('/priceDataUpload',serverController.comprasPrice);
+
 module.exports = routes;
