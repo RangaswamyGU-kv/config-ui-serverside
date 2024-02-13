@@ -48,6 +48,10 @@ export function getItem(key) {
     return sessionStorage.getItem(key)
 }
 
+export function getDomainName() {
+    return sessionStorage.getItem('domain')
+}
+
 export function getUserName() {
     return sessionStorage.getItem('userName')
 }

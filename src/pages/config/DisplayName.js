@@ -1,4 +1,3 @@
-
 import React,{ Component, Fragment } from 'react'
 import { 
     Link,
@@ -27,6 +26,7 @@ import { DeleteTwoTone } from '@ant-design/icons';
 
 // Styles
 import styles from '../../styles/displayname.module.css';
+import { getDomainName } from '../../lib/auth';
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -67,8 +67,6 @@ export default class DisplayName extends Component {
     }
 
     setSelected = (selected,id, url) => {
-        
-        console.log("stateResponses===",selected)
         window.scrollTo({
             top: 0,
             left: 0,
@@ -98,8 +96,6 @@ export default class DisplayName extends Component {
     }
 
     onSearch = (e) => {
-        
-        console.log("stateResponses===",e)
         // change
         this.setState({ 
             input: e.target.value 
@@ -123,9 +119,8 @@ export default class DisplayName extends Component {
     }
 
     displayProperty = (config, response) => {
-        console.log("config===",config)
-        console.log("response===",response)
         // change
+        let domainName = (typeof window !== 'undefined') ? getDomainName() : 'search';
         const displaying = config.displayProperty;
         return response && response.body && response.body.map((item, key) => {
             return (
@@ -138,7 +133,7 @@ export default class DisplayName extends Component {
                                     className={styles.display_name_list}
                                 >
                                     <NavLink 
-                                        to={`/config/${config.urlPath}/details/${item[displaying]}`} 
+                                        to={`/${domainName}/config/${config.urlPath}/details/${item[displaying]}`} 
                                         onClick={() => this.setSelected(item,item[displaying], config.urlPath)}
                                         activeStyle={{
                                             fontWeight: "bold",
@@ -163,9 +158,9 @@ export default class DisplayName extends Component {
 
     searchDisplay = (stateResponses, config) => {
         // change
-        console.log("===stateResponses===",stateResponses)
-        console.log("===config===",config)
         const displaying = config.displayProperty
+        const { configurations, setSelected } = this.props
+        let domainName = (typeof window !== 'undefined') ? getDomainName() : 'search';
         return stateResponses.map((item, key) => {
             return (
                 <>
@@ -177,7 +172,7 @@ export default class DisplayName extends Component {
                                     className={styles.display_name_list}
                                 >
                                     <NavLink
-                                        to={`/config/${config.urlPath}/details/${item[displaying]}`} 
+                                        to={`/${domainName}/config/${config.urlPath}/details/${item[displaying]}`} 
                                         onClick={() => this.setSelected(item, item[displaying], config.urlPath)}
                                         activeStyle={{
                                             fontWeight: "bold",
@@ -201,7 +196,6 @@ export default class DisplayName extends Component {
     }
 
     removeClick = (id, urlPath) => {
-        
         // change
         this.call(id, urlPath)
     }
@@ -232,11 +226,11 @@ export default class DisplayName extends Component {
     displayNavigation = () => {
         // change
         const { configurations, setSelected } = this.props
-        
+        let domainName = (typeof window !== 'undefined') ? getDomainName()  : 'search';
         return (configurations && configurations.body && configurations.body.map((item, key) => (
             <Menu.Item key={key}>
-                <Link href="#" to={`/config/${item.urlPath}`} 
-                    onClick={() => this.handleClick(`/${item.urlPath}`)}
+                <Link href="#" to={`/${domainName}/config/${item.urlPath}`} 
+                    onClick={() => this.handleClick(item.urlPath)}
                 >
                     {item.displayName}
                 </Link>
@@ -250,8 +244,8 @@ export default class DisplayName extends Component {
 
     render() {
         const { config, response } = this.props;
-        console.log("===config===,",this.props)
         const { stateResponses } = this.state;
+        let domainName = (typeof window !== 'undefined') ? getDomainName() : 'search';
         return (
             <Layout>
                 <Sider width={250} className="site-layout-background">
@@ -322,7 +316,7 @@ export default class DisplayName extends Component {
                                                         />
                                                 }
                                             /> */}
-                                            <Route path={`/config/${config.urlPath}/details/:id`}
+                                            <Route path={`/${domainName}/config/${config.urlPath}/details/:id`}
                                                 render={
                                                     (props) => this.state.selectedConfig && 
                                                         this.state.isToggle &&

@@ -86,7 +86,7 @@ const Login = (props) => {
                 message.success({ content: 'successfully Logged in!', key: 'updatable', duration: 4 });
                 props.triggerNavbarFromLogin();
                 props.triggerLogin();
-                history.push('/config/configMap');
+                history.push('/search/config/configMap');
             }
         } else {
             message.error({ content: 'Unable to login, please try again!', key: 'updatable', duration: 4 });

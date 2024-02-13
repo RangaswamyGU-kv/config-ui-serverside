@@ -15,31 +15,31 @@ export const routes = [
         isProtected:false
     },
     {
-        path:'/config/configMap',
+        path:'/:id/config/configMap',
         component:Config,
         exact:true,
         isProtected:false
     },
     {
-        path: '/config/staticKeys',
+        path: '/:id/config/staticKeys',
         component: Config,
         exact: true,
         isProtected: false
       },
       {
-        path: '/config/supplierConfig',
+        path: '/:id/config/supplierConfig',
         component: Config,
         exact: true,
         isProtected: false
       },
       {
-        path: '/config/configList',
+        path: '/:id/config/configList',
         component: Config,
         exact: true,
         isProtected: false
       },
       {
-        path: '/upload',
+        path: '/search/upload',
         component: UploadData,
         exact: true,
         isProtected: false
@@ -75,7 +75,7 @@ export const routes = [
         isProtected: false
       },
       {
-        path:'/compras/service',
+        path:'/:id/service',
         component: Compras,
         exact: true,
         isProtected: false
